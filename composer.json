@@ -1,0 +1,18 @@
+{
+    "name": "prin0u/devoir-app-mvc-php",
+    "description": "Application MVC PHP pour covoiturage",
+    "autoload": {
+        "psr-4": {
+            "Prin0u\\DevoirAppMvcPhp\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Prin0u"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "izniburak/router": "^3.1"
+    }
+}
