@@ -1,5 +1,9 @@
 <?php
 
+use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
+
+   
+
 // Chargement de l'autoload Composer
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -15,7 +19,14 @@ session_start();
 
 // Initialisation du routeur Izniburak
 $router = new \Buki\Router\Router([
-    'base_folder' => dirname(__DIR__) . "/../app/Controllers"
+    'paths' => [
+        'controllers' => '../app/Controllers/',
+        'middlewares' => '../app/Middlewares/',
+    ],
+    'namespaces' => [
+        'controllers' => 'Prin0u\DevoirAppMvcPhp\Controllers',
+        'middlewares' => 'Prin0u\DevoirAppMvcPhp\Middlewares',
+    ],
 ]);
 
 // Chargement des routes
