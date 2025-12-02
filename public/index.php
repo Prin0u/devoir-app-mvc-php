@@ -12,3 +12,15 @@ $dbConfig = require __DIR__ . '/../config/database.php';
 // Lancement de la session
 
 session_start();
+
+// Initialisation du routeur Izniburak
+$router = new \Buki\Router\Router([
+    'base_folder' => dirname(__DIR__) . "/../app/Controllers"
+]);
+
+// Chargement des routes
+require __DIR__ . '/../app/routes.php';
+
+// Lancement du routeur
+
+$router->run();
