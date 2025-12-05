@@ -1,8 +1,8 @@
 <?php
 return [
     'host' => 'localhost',
-    'dbname' => 'tpak',
-    'user' => 'root',
-    'password' => '',
+    'dbname' => 'database_tpak',
+    'user' => 'tpak_user',
+    'password' => 'MotDePasse123!',
     'charset' => 'utf8mb4',
 ];
