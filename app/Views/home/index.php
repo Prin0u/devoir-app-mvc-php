@@ -11,8 +11,7 @@ error_reporting(E_ALL); ?>
     <title>Touche pas au klaxon</title>
 </head>
 <body>
-            <?php require __DIR__ . '/../partials/header.php'; ?>
-        <h2>Liste des trajets</h2>
+            <?php require __DIR__ . '/../partials/header.php'; ?>        <h2>Liste des trajets</h2>
         <?php if (empty($trajets)) : ?>
             <p>Aucun trajet prévu pour le moment.</p>
         <?php else : ?>
