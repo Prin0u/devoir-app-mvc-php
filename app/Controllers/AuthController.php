@@ -19,8 +19,14 @@ class AuthController extends Controller
     // Traitement du formulaire
     public function loginPost()
     {   
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
+
+        if (!$email || !$password) {
+            $_SESSION['flash_error'] = "Tous les champs sont obligatoires.";
+            header('Location: /login');
+            exit;
+        }
 
     
         try {

@@ -18,7 +18,7 @@
                 <div class="alert alert-danger text-center">
                     <?= htmlspecialchars($_SESSION['flash_error']) ?>
                 </div>
-                <?php unset($_SESSION['error']); ?>
+                <?php unset($_SESSION['flash_error']); ?>
             <?php endif; ?>
 
             <form method="POST" action="/login" class="card p-4 shadow">
