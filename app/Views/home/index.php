@@ -32,9 +32,9 @@ error_reporting(E_ALL); ?>
         <?php unset($_SESSION['flash_error']); ?>
     <?php endif; ?>
 
-    <h2>Trajets proposés</h2>
+    <h2 class=" mt-4 text-center">Trajets proposés</h2>
     <?php if (empty($trajets)) : ?>
-        <p>Aucun trajet prévu pour le moment.</p>
+        <p class="mt-2 text-center">Aucun trajet prévu pour le moment.</p>
     <?php else : ?>
         <div class="table-responsive">
             <table class="table table-striped table-bordered">

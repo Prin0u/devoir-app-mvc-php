@@ -88,7 +88,7 @@ class TrajetController extends Controller
                 $_SESSION['user']['id']
             ]);
 
-            $_SESSION['flash_success'] = "Trajet créé avec succès !";
+            $_SESSION['flash_success'] = "Le trajet a été créé";
             header('Location: /');
             exit;
         } catch (\PDOException $e) {

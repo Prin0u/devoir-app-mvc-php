@@ -1,0 +1,40 @@
+$navbar-bg: #0074c7;
+$btn-create-bg: #82b864;
+$btn-logout-bg: #cd2c2e;
+$text-color: #ffffff;
+
+// Navbar générale
+.navbar {
+  background-color: $navbar-bg;
+  padding: 0.4rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .navbar-brand {
+    color: $text-color;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+
+    .nav-item {
+      color: #ffffff;
+
+      .btn-create {
+        min-width: 180px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem;
+        cursor: pointer;
+        white-space: nowrap;
+        background-color: #82b864;
+        color: #ffffff;
+      }
+    }
+  }
+}

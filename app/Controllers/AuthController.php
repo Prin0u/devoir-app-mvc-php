@@ -15,10 +15,10 @@ class AuthController extends Controller
     {
         $this->render('auth/login');
     }
-    
+
     // Traitement du formulaire
     public function loginPost()
-    {   
+    {
         $email = $_POST['email'] ?? null;
         $password = $_POST['password'] ?? null;
 
@@ -28,20 +28,20 @@ class AuthController extends Controller
             exit;
         }
 
-    
+
         try {
             $pdo = Database::getInstance();
-    
+
             $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-    
+
             if (!$user || !password_verify($password, $user['password'])) {
                 $_SESSION['flash_error'] = "Email ou mot de passe incorrect.";
                 header('Location: /login');
                 exit;
             }
-    
+
             // Connexion réussie
             $_SESSION['user'] = [
                 'id' => $user['id_user'],
@@ -49,17 +49,21 @@ class AuthController extends Controller
                 'prenom' => $user['prenom'],
                 'email' => $user['email']
             ];
-    
+
             header('Location: /');
             exit;
-    
         } catch (\PDOException $e) {
             // Affiche l’erreur PDO pour debug
             echo "Erreur PDO : " . $e->getMessage();
             exit;
         }
     }
-    
+    public static function isAdmin(): bool
+    {
+        return isset($_SESSION['user'])
+            && $_SESSION['user']['email'] === 'alexandre.martin@email.fr';
+    }
+
 
     // Deconnexion
     public function logout()
