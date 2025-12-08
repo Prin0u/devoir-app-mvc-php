@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<?php require_once __DIR__ . '/../partials/header.php'; ?>
 
 
 <div class="container mt-5">
@@ -14,31 +15,31 @@
         <?php unset($_SESSION['flash_success']); ?>
     <?php endif; ?>
 
-<form method="POST" action="/trajet/create" class="mx-auto" style="max-width: 500px;">
+    <form method="POST" action="/trajet/create" class="mx-auto" style="max-width: 500px;">
 
-    <div class="mb-3">
-        <label for="agence_depart" class="form-label">Agence de départ</label>
-        <select name="agence_depart" id="agence_depart" class="form-select" required>
-            <option value="">-- Choisir --</option>
-            <?php foreach ($agences as $agence): ?>
-                <option value="<?= (int) $agence['id_agence'] ?>">
-                    <?= htmlspecialchars($agence['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="agence_depart" class="form-label">Agence de départ</label>
+            <select name="agence_depart" id="agence_depart" class="form-select" required>
+                <option value="">-- Choisir --</option>
+                <?php foreach ($agences as $agence): ?>
+                    <option value="<?= (int) $agence['id_agence'] ?>">
+                        <?= htmlspecialchars($agence['nom']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-    <div class="mb-3">
-        <label for="agence_arrivee" class="form-label">Agence d'arrivée</label>
-        <select name="agence_arrivee" id="agence_arrivee" class="form-select" required>
-            <option value="">-- Choisir --</option>
-            <?php foreach ($agences as $agence): ?>
-                <option value="<?= (int) $agence['id_agence'] ?>">
-                    <?= htmlspecialchars($agence['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="agence_arrivee" class="form-label">Agence d'arrivée</label>
+            <select name="agence_arrivee" id="agence_arrivee" class="form-select" required>
+                <option value="">-- Choisir --</option>
+                <?php foreach ($agences as $agence): ?>
+                    <option value="<?= (int) $agence['id_agence'] ?>">
+                        <?= htmlspecialchars($agence['nom']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
 
         <div class="mb-3">

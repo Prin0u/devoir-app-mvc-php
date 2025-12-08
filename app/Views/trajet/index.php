@@ -34,7 +34,7 @@
                                         Modifier
                                     </a>
 
-                                    <form method="POST" action="/trajet/delete/<?= $trajet['id_trajet'] ?>" style="display:inline;"
+                                    <form method="POST" action="/trajet/delete/<?= $trajet['id_trajet'] ?>"
                                         onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');">
                                         <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                                     </form>

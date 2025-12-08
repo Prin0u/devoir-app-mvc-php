@@ -1,0 +1,32 @@
+.navbar {
+  background-color: #0074c7;
+  padding: 0.4rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+.navbar .navbar-nav {
+  display: flex;
+  align-items: center;
+}
+.navbar .navbar-nav .nav-item {
+  color: #ffffff;
+}
+.navbar .navbar-nav .nav-item .btn-create {
+  min-width: 180px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: #82b864;
+  color: #ffffff;
+}
+
+/*# sourceMappingURL=main.css.map */
