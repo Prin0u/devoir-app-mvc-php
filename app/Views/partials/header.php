@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 
 
 <?php
@@ -11,21 +13,20 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
         TOUCHE PAS AU KLAXON
     </a>
 
-    <!-- Menu burger -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menu classique / collapsible -->
     <div class="collapse navbar-collapse w-100" id="navbarContent">
-        <div class="d-flex w-100 justify-content-between align-items-center">
 
-            <!-- Partie gauche / centre : menu -->
-            <ul class="navbar-nav mx-auto align-items-center gap-3 flex-column flex-lg-row text-center">
+        <div class="d-flex flex-column flex-lg-row w-100 align-items-center justify-content-lg-start">
+
+            <ul class="navbar-nav mx-auto mx-lg-0 ms-lg-auto gap-3 flex-column flex-lg-row text-center">
+
                 <?php if (!isset($_SESSION['user'])): ?>
-                    <li class="nav-item">
-                        <a href="/login" class="btn btn-light">Connexion</a>
+                    <li class="nav-item w-100">
+                        <a href="/login" class="btn btn-light mx-auto" style="display: block; width: fit-content;">Connexion</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
@@ -50,9 +51,10 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
                 <?php endif; ?>
             </ul>
 
-            <!-- Bouton déconnexion à droite -->
             <?php if (isset($_SESSION['user'])): ?>
-                <a href="/logout" class="btn btn-danger ms-3">Déconnexion</a>
+                <li class="nav-item mt-3 mt-lg-0 list-unstyled">
+                    <a href="/logout" class="btn btn-danger">Déconnexion</a>
+                </li>
             <?php endif; ?>
         </div>
     </div>
