@@ -51,3 +51,5 @@
         <a href="/trajet/create" class="btn btn-success btn-lg">Créer un trajet</a>
     </div>
 </div>
+
+<?php include __DIR__ . '/../partials/footer.php'; ?>
