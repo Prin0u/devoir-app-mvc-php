@@ -4,6 +4,7 @@ namespace Prin0u\DevoirAppMvcPhp\Controllers;
 
 use Prin0u\DevoirAppMvcPhp\Core\Controller;
 use Prin0u\DevoirAppMvcPhp\Core\Database;
+use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
 
 class TrajetController extends Controller
 {
@@ -254,7 +255,7 @@ class TrajetController extends Controller
         }
 
         // Vérifier que l'utilisateur est le créateur
-        if ($trajet['id_user_createur'] != $_SESSION['user']['id']) {
+        if ($trajet['id_user_createur'] != $_SESSION['user']['id'] && !AuthController::isAdmin()) {
             $_SESSION['flash_error'] = "Accès interdit.";
             header('Location: /');
             exit;
@@ -272,5 +273,26 @@ class TrajetController extends Controller
             header('Location: /');
             exit;
         }
+    }
+    // Récupérer les infos utilisateur
+    public function getUserInfo(int $id_user): array
+    {
+        $pdo = Database::getInstance();
+        $stmt = $pdo->prepare("SELECT nom, prenom, email, telephone FROM utilisateurs WHERE id_user = :id");
+        $stmt->execute(['id' => $id_user]);
+        $userData = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $userData ?: [];
+    }
+
+    // Récupérer le nombre total de places pour cet utilisateur
+    public function getNbPlacesByUser(int $id_user): int
+    {
+        $pdo = Database::getInstance();
+        $stmt = $pdo->prepare("SELECT SUM(nb_places_disponibles) as total FROM trajets WHERE id_user_createur = :id");
+        $stmt->execute(['id' => $id_user]);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        return $result['total'] ?? 0;
     }
 }
