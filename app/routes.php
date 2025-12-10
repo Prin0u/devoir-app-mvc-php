@@ -3,6 +3,7 @@
 use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
 use Prin0u\DevoirAppMvcPhp\Controllers\TrajetController;
 use Prin0u\DevoirAppMvcPhp\Controllers\AdminController;
+use Prin0u\DevoirAppMvcPhp\Controllers\AdminAgencesController;
 
 // Route de la page d'accueil
 
@@ -24,10 +25,15 @@ $router->post('/trajet/update/:id', [TrajetController::class, 'update']);
 $router->get('/trajet/delete/:id', [TrajetController::class, 'delete']);
 $router->post('/trajet/delete/:id', [TrajetController::class, 'delete']);
 
+//Routes de la page agences
+$router->get('/admin/agences', [AdminAgencesController::class, 'index']);
+$router->get('/admin/agences/create', [AdminAgencesController::class, 'create']);
+$router->post('/admin/agences/', [AdminAgencesController::class, 'store']);
+$router->get('/admin/agences/edit/:id', [AdminAgencesController::class, 'edit']);
+$router->post('/admin/agences/update/:id', [AdminAgencesController::class, 'update']);
+$router->post('/admin/agences/delete/:id', [AdminAgencesController::class, 'delete']);
 
 // Routes des pages admin
-
 $router->get('/admin/users', [AdminController::class, 'users']);
-$router->get('/admin/agences', [AdminController::class, 'agences']);
 $router->get('/admin/trajets', [AdminController::class, 'trajets']);
 $router->post('/admin/trajets/:id', [AdminController::class, 'delete']);

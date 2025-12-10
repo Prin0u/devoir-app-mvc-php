@@ -219,7 +219,7 @@ class TrajetController extends Controller
                 $id
             ]);
 
-            $_SESSION['flash_success'] = "Le trajet a été modifié";
+            $_SESSION['flash_success'] = "Trajet modifié";
             header('Location: /');
             exit;
         } catch (\PDOException $e) {
@@ -265,7 +265,7 @@ class TrajetController extends Controller
             $stmt = $pdo->prepare("DELETE FROM trajets WHERE id_trajet = ?");
             $stmt->execute([$id]);
 
-            $_SESSION['flash_success'] = "Le trajet a été supprimé";
+            $_SESSION['flash_success'] = "Trajet supprimé";
             header('Location: /');
             exit;
         } catch (\PDOException $e) {

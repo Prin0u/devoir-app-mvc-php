@@ -20,18 +20,6 @@ class AdminController extends Controller
         $this->render('admin/users', ['users' => $users]);
     }
 
-    // Liste des agences
-    public function agences()
-    {
-        $this->checkAdmin();
-
-        $pdo = Database::getInstance();
-        $stmt = $pdo->query("SELECT * FROM agences ORDER BY nom ASC");
-        $agences = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-        $this->render('admin/agences', ['agences' => $agences]);
-    }
-
     // Liste des trajets
     public function trajets()
     {
