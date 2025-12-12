@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Fichier AdminAgencesController.php
+ * * Ce contrôleur gère toutes les opérations CRUD (Créer, Lire, Modifier, Supprimer)
+ * pour l'entité Agences (villes), et est exclusivement accessible aux Administrateurs.
+ * * @package Prin0u\DevoirAppMvcPhp\Controllers
+ */
+
 namespace Prin0u\DevoirAppMvcPhp\Controllers;
 
 use Prin0u\DevoirAppMvcPhp\Core\Controller;
@@ -10,6 +17,11 @@ class AdminAgencesController extends Controller
 {
     private function checkAdmin()
     {
+        /**
+         * Vérifie si l'utilisateur a les droits d'administration.
+         * Si l'utilisateur n'est pas admin, il est redirigé vers la page d'accueil.
+         * * @return void
+         */
         if (!isset($_SESSION['user']) || !AuthController::isAdmin()) {
             $_SESSION['flash_error'] = "Accès interdit.";
             header('Location: /');
@@ -17,7 +29,11 @@ class AdminAgencesController extends Controller
         }
     }
 
-    // [R]ead - Liste des agences (Vue: views/admin/agences.php)
+    /**
+     * Affiche la liste de toutes les agences.
+     * Read - Route: GET /admin/agences
+     * * @return void
+     */
     public function index()
     {
         $this->checkAdmin();
@@ -27,14 +43,22 @@ class AdminAgencesController extends Controller
         $this->render('admin/agences', ['agences' => $agences]);
     }
 
-    // [C]reate - Affichage du formulaire (Vue: views/agences/create.php)
+    /**
+     * Affiche le formulaire de création d'une nouvelle agence.
+     * Create - Route: GET /admin/agences/create
+     * * @return void
+     */
     public function create()
     {
         $this->checkAdmin();
         $this->render('agences/create');
     }
 
-    // [C]reate - Traitement de l'insertion
+    /**
+     * Traite la soumission du formulaire et insère une nouvelle agence en BDD.
+     * Create - Route: POST /admin/agences/store
+     * * @return void
+     */
     public function store()
     {
         $this->checkAdmin();
@@ -49,7 +73,7 @@ class AdminAgencesController extends Controller
             $stmt = $pdo->prepare("INSERT INTO agences (nom) VALUES (?)");
             $stmt->execute([htmlspecialchars($_POST['nom'])]);
 
-            $_SESSION['flash_success'] = "L'agence a été créée";
+            $_SESSION['flash_success'] = "Agence créée.";
             header('Location: /admin/agences');
             exit();
         } catch (\PDOException $e) {
@@ -59,7 +83,12 @@ class AdminAgencesController extends Controller
         }
     }
 
-    // Affichage du formulaire pré-rempli
+    /**
+     * Affiche le formulaire de modification pré-rempli pour une agence.
+     * Update - Route: GET /admin/agences/edit/{id}
+     * * @param int $id L'identifiant de l'agence à modifier.
+     * @return void
+     */
     public function edit(int $id)
     {
         $this->checkAdmin();
@@ -76,7 +105,12 @@ class AdminAgencesController extends Controller
         $this->render('agences/edit', ['agence' => $agence]);
     }
 
-    // Traitement de la modification
+    /**
+     * Traite la soumission du formulaire et met à jour l'agence correspondante.
+     * Update - Route: POST /admin/agences/update/{id}
+     * * @param int $id L'identifiant de l'agence à mettre à jour.
+     * @return void
+     */
     public function update(int $id)
     {
         $this->checkAdmin();
@@ -91,7 +125,7 @@ class AdminAgencesController extends Controller
             $stmt = $pdo->prepare("UPDATE agences SET nom = ? WHERE id_agence = ?");
             $stmt->execute([htmlspecialchars($_POST['nom']), $id]);
 
-            $_SESSION['flash_success'] = "Agence modifiée";
+            $_SESSION['flash_success'] = "Agence modifiée.";
             header('Location: /admin/agences');
             exit();
         } catch (\PDOException $e) {
@@ -101,7 +135,12 @@ class AdminAgencesController extends Controller
         }
     }
 
-    // Suppression
+    /**
+     * Supprime une agence spécifique de la base de données.
+     * Delete - Route: POST /admin/agences/delete/{id}
+     * * @param int $id L'identifiant de l'agence à supprimer.
+     * @return void
+     */
     public function delete(int $id)
     {
         $this->checkAdmin();
@@ -117,10 +156,12 @@ class AdminAgencesController extends Controller
             $stmt_delete->execute([$id]);
 
             $_SESSION['flash_success'] = "Agence supprimée.";
-            header('Location: /admin/agences');
-            exit;
         } catch (\PDOException $e) {
             $_SESSION['flash_error'] = "Erreur de base de données lors de la suppression.";
         }
+
+        // La redirection vers la liste se fait dans tous les cas
+        header('Location: /admin/agences');
+        exit;
     }
 }

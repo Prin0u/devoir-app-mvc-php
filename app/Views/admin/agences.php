@@ -2,7 +2,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
-<?php require __DIR__ . '/../partials/header.php'; ?>
+<?php
+/**
+ * Vue : Liste et gestion des agences.
+ * ----------------------------------------------------
+ * Cette page affiche la liste de toutes les agences de la base de données
+ * et fournit les options pour créer, modifier ou supprimer une agence.
+ *
+ * Variables injectées :
+ * - $agences (array): Liste des agences, chacune contenant ['id_agence', 'nom'].
+ */
+require __DIR__ . '/../partials/header.php';
+?>
 
 
 <div class="container mt-5">
@@ -15,16 +26,21 @@
     </div>
 
     <?php
-    // Affichage des messages flash de succès ou d'erreur
+    // Début de la gestion des messages flash
+    // Affiche le message de succès s'il existe et le supprime de la session
     if (isset($_SESSION['flash_success'])): ?>
-        <div class="alert alert-success"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+        <div class="alert alert-success text-center"><?= htmlspecialchars($_SESSION['flash_success']) ?></div>
         <?php unset($_SESSION['flash_success']); ?>
     <?php endif; ?>
 
-    <?php if (isset($_SESSION['flash_error'])): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($_SESSION['flash_error']) ?></div>
+    <?php
+    // Affiche le message d'erreur s'il existe et le supprime de la session
+    if (isset($_SESSION['flash_error'])): ?>
+        <div class="alert alert-danger text-center"><?= htmlspecialchars($_SESSION['flash_error']) ?></div>
         <?php unset($_SESSION['flash_error']); ?>
-    <?php endif; ?>
+    <?php endif;
+    // Fin de la gestion des messages flash
+    ?>
 
     <?php if (empty($agences)) : ?>
         <div class="alert alert-info text-center">
@@ -46,7 +62,6 @@
                             <td>
                                 <a href="/admin/agences/edit/<?= htmlspecialchars($agence['id_agence']) ?>" class="btn p-0 border-0 text-warning" title="Modifier">
                                     <i class="bi bi-pencil-square fs-5"></i>
-
                                 </a>
 
                                 <form method="POST" action="/admin/agences/delete/<?= htmlspecialchars($agence['id_agence']) ?>" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette agence ?');">

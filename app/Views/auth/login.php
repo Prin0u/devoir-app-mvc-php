@@ -5,7 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <?php require_once __DIR__ . '/../partials/header.php'; ?>
+    <?php
+    /**
+     * Vue : Formulaire de connexion.
+     * ----------------------------------------------------
+     * Cette page présente le formulaire pour l'authentification des utilisateurs.
+     * Le formulaire utilise la méthode POST et soumet les données (email, mot de passe)
+     * à l'action '/login' (gérée par AuthController::loginPost()).
+     *
+     * Variables utilisées (via la session) :
+     * - $_SESSION['flash_error'] : Message d'erreur affiché en cas d'échec de la connexion.
+     */
+    // Inclusion des éléments de l'en-tête (balises de script, etc.)
+    require_once __DIR__ . '/../partials/header.php';
+    ?>
 
     <title>Connexion</title>
 </head>
@@ -51,7 +64,10 @@
                     </div>
 
                 </form>
-
             </div>
         </div>
     </div>
+
+</body>
+
+</html>

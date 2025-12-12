@@ -1,5 +1,14 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+/**
+ * Vue : Formulaire de modification d'une agence existante.
+ * ----------------------------------------------------
+ * Cette page est utilisée par l'administrateur pour mettre à jour le nom d'une agence spécifique.
+ * Le formulaire utilise la méthode POST et soumet les données à l'action '/admin/agences/update/{id}'.
+ *
+ * Variables injectées :
+ * - $agence (array): Les données de l'agence à modifier, contenant ['id_agence', 'nom'].
+ */
 require_once __DIR__ . '/../partials/header.php';
 ?>
 
@@ -17,7 +26,10 @@ require_once __DIR__ . '/../partials/header.php';
         <?php unset($_SESSION['flash_success']); ?>
     <?php endif; ?>
 
-    <form method="POST" action="/admin/agences/update/<?= htmlspecialchars($agence['id_agence']) ?>" class="mx-auto" style="max-width: 500px;">
+    <form method="POST"
+        action="/admin/agences/update/<?= htmlspecialchars($agence['id_agence']) ?>"
+        class="mx-auto" style="max-width: 500px;">
+
         <div class="mb-3">
             <label for="nom" class="form-label">Nom de l'agence</label>
             <input type="text" name="nom" id="nom" class="form-control" required
