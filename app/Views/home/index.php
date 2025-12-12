@@ -46,8 +46,15 @@
     <?php endif; ?>
 
     <div class="container mt-4">
-        <h2 class="text-center mb-4">Trajets proposés</h2>
-
+        <?php
+        /**
+         * Titre conditionnel basé sur l'état de la connexion.
+         */
+        if (isset($_SESSION['user'])): ?>
+            <h2 class="text-center mb-4">Trajets proposés</h2>
+        <?php else: ?>
+            <h2 class="text-center mb-4">Pour obtenir plus d'informations sur un trajet, veuillez vous connecter.</h2>
+        <?php endif; ?>
         <?php if (empty($trajets)) : ?>
             <p class="text-center">Aucun trajet prévu pour le moment.</p>
         <?php else : ?>
@@ -62,17 +69,17 @@
                             <th>Date</th>
                             <th>Heure</th>
                             <th>Places</th>
-                            <th></th>
+
+                            <?php
+                            if (isset($_SESSION['user'])): ?>
+                                <th>Actions</th>
+                            <?php endif; ?>
+
                         </tr>
                     </thead>
                     <tbody class="text-center">
                         <?php
-                        /**
-                         * Boucle principale d'affichage des trajets.
-                         */
                         foreach ($trajets as $trajet): ?>
-                            <?php
-                            ?>
                             <tr>
                                 <td><?= htmlspecialchars($trajet['depart']) ?></td>
                                 <td><?= date('d/m/Y', strtotime($trajet['date_heure_depart'])) ?></td>
@@ -81,47 +88,61 @@
                                 <td><?= date('d/m/Y', strtotime($trajet['date_heure_arrivee'])) ?></td>
                                 <td><?= date('H:i', strtotime($trajet['date_heure_arrivee'])) ?></td>
                                 <td><?= $trajet['nb_places_disponibles'] ?></td>
-                                <td class="d-flex justify-content-center align-items-center gap-2">
 
-                                    <a href="#" class="text-info" title="Voir" data-bs-toggle="modal" data-bs-target="#userModal<?= $trajet['id_trajet'] ?>">
-                                        <i class="bi bi-eye fs-5"></i>
-                                    </a>
+                                <?php
+                                // MASQUER LA CELLULE D'ACTIONS SI DÉCONNECTÉ
+                                if (isset($_SESSION['user'])): ?>
+                                    <td class="d-flex justify-content-center align-items-center gap-2">
 
-                                    <a href="/trajet/edit/<?= $trajet['id_trajet'] ?>" class="text-warning" title="Modifier">
-                                        <i class="bi bi-pencil-square fs-5"></i>
-                                    </a>
+                                        <a href="#" class="text-info" title="Voir" data-bs-toggle="modal" data-bs-target="#userModal<?= $trajet['id_trajet'] ?>">
+                                            <i class="bi bi-eye fs-5"></i>
+                                        </a>
 
-                                    <form method="POST" action="/trajet/delete/<?= $trajet['id_trajet'] ?>"
-                                        onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');">
-                                        <button type="submit" class="btn p-0 border-0 text-danger" title="Supprimer">
-                                            <i class="bi bi-trash-fill fs-5"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                        <?php
+                                        // 2. MODIFIER/SUPPRIMER : Visible seulement par le créateur du trajet
+                                        if ($_SESSION['user']['id'] == $trajet['id_user_createur']): ?>
+                                            <a href="/trajet/edit/<?= $trajet['id_trajet'] ?>" class="text-warning" title="Modifier">
+                                                <i class="bi bi-pencil-square fs-5"></i>
+                                            </a>
+
+                                            <form method="POST" action="/trajet/delete/<?= $trajet['id_trajet'] ?>"
+                                                onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');">
+                                                <button type="submit" class="btn p-0 border-0 text-danger" title="Supprimer">
+                                                    <i class="bi bi-trash-fill fs-5"></i>
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </td>
+                                <?php endif; ?>
+
                             </tr>
 
-                            <div class="modal fade" id="userModal<?= $trajet['id_trajet'] ?>" tabindex="-1" aria-labelledby="userModalLabel<?= $trajet['id_trajet'] ?>" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="userModalLabel<?= $trajet['id_trajet'] ?>">Informations utilisateur</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><strong>Nom :</strong> <?= htmlspecialchars($trajet['user_nom']) ?></li>
-                                                <li class="list-group-item"><strong>Prénom :</strong> <?= htmlspecialchars($trajet['user_prenom']) ?></li>
-                                                <li class="list-group-item"><strong>Email :</strong> <?= htmlspecialchars($trajet['user_email']) ?></li>
-                                                <li class="list-group-item"><strong>Téléphone :</strong> <?= htmlspecialchars($trajet['user_telephone']) ?></li>
-                                                <li class="list-group-item"><strong>Places disponibles :</strong> <?= $trajet['nb_places_disponibles'] ?></li>
-                                            </ul>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-modal" data-bs-dismiss="modal">Fermer</button>
+                            <?php
+                            // 3. LA MODALE ENTIÈRE DOIT ÊTRE MASQUÉE SI DÉCONNECTÉ
+                            if (isset($_SESSION['user'])): ?>
+                                <div class="modal fade" id="userModal<?= $trajet['id_trajet'] ?>" tabindex="-1" aria-labelledby="userModalLabel<?= $trajet['id_trajet'] ?>" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="userModalLabel<?= $trajet['id_trajet'] ?>">Informations utilisateur</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><strong>Nom :</strong> <?= htmlspecialchars($trajet['user_nom']) ?></li>
+                                                    <li class="list-group-item"><strong>Prénom :</strong> <?= htmlspecialchars($trajet['user_prenom']) ?></li>
+                                                    <li class="list-group-item"><strong>Email :</strong> <?= htmlspecialchars($trajet['user_email']) ?></li>
+                                                    <li class="list-group-item"><strong>Téléphone :</strong> <?= htmlspecialchars($trajet['user_telephone']) ?></li>
+                                                    <li class="list-group-item"><strong>Places disponibles :</strong> <?= $trajet['nb_places_disponibles'] ?></li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-modal" data-bs-dismiss="modal">Fermer</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
 
                         <?php endforeach; ?>
                     </tbody>

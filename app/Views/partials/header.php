@@ -58,7 +58,7 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
                         <a href="/trajet/create" class="btn-create btn-lg">Créer un trajet</a>
                     </li>
 
-                    <li class="nav-item text-white">
+                    <li class="nav-item text-white mx-1">
                         Bonjour <?= htmlspecialchars($_SESSION['user']['prenom']) ?> <?= htmlspecialchars($_SESSION['user']['nom']) ?>
                     </li>
 
