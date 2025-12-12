@@ -4,6 +4,7 @@ use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
 use Prin0u\DevoirAppMvcPhp\Controllers\TrajetController;
 use Prin0u\DevoirAppMvcPhp\Controllers\AdminController;
 use Prin0u\DevoirAppMvcPhp\Controllers\AdminAgencesController;
+use Prin0u\DevoirAppMvcPhp\Controllers\AdminTrajetsController;
 
 // Route de la page d'accueil
 
@@ -35,5 +36,5 @@ $router->post('/admin/agences/delete/:id', [AdminAgencesController::class, 'dele
 
 // Routes des pages admin
 $router->get('/admin/users', [AdminController::class, 'users']);
-$router->get('/admin/trajets', [AdminController::class, 'trajets']);
-$router->post('/admin/trajets/:id', [AdminController::class, 'delete']);
+$router->get('/admin/trajets', [AdminTrajetsController::class, 'index']);
+$router->post('/admin/trajets/:id', [AdminTrajetsController::class, 'delete']);

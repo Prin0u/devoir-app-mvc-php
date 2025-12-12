@@ -1,14 +1,17 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-use Prin0u\DevoirAppMvcPhp\Controllers\TrajetController;
+/**
+ * Fichier : home/index.php
+ * Rôle : Point d'entrée de l'application (Front Controller) et Vue d'accueil.
+ * Description : 
+ * - Affiche la structure HTML principale et la liste des trajets disponibles.
+ *
+ * Variables de contexte attendues (injectées par HomeController) :
+ * @var array $trajets Liste des trajets futurs, enrichie des données des créateurs.
+ */
 
-// Instancie le controller si nécessaire
-$controller = new TrajetController();
+
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -23,7 +26,11 @@ $controller = new TrajetController();
 <body>
     <?php require __DIR__ . '/../partials/header.php'; ?>
 
-    <!-- Messages flash -->
+    <?php
+    /**
+     * Bloc d'affichage des messages flash de succès ou d'erreur stockés en session.
+     */
+    ?>
     <?php if (!empty($_SESSION['flash_success'])): ?>
         <div class="alert alert-success text-center my-3">
             <?= htmlspecialchars($_SESSION['flash_success']) ?>
@@ -59,11 +66,12 @@ $controller = new TrajetController();
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <?php foreach ($trajets as $trajet): ?>
+                        <?php
+                        /**
+                         * Boucle principale d'affichage des trajets.
+                         */
+                        foreach ($trajets as $trajet): ?>
                             <?php
-                            // Récupérer les infos utilisateur
-                            $user = $controller->getUserInfo($trajet['id_user_createur']);
-                            $nbPlaces = $controller->getNbPlacesByUser($trajet['id_user_createur']);
                             ?>
                             <tr>
                                 <td><?= htmlspecialchars($trajet['depart']) ?></td>
@@ -75,17 +83,14 @@ $controller = new TrajetController();
                                 <td><?= $trajet['nb_places_disponibles'] ?></td>
                                 <td class="d-flex justify-content-center align-items-center gap-2">
 
-                                    <!-- Voir (modale) -->
                                     <a href="#" class="text-info" title="Voir" data-bs-toggle="modal" data-bs-target="#userModal<?= $trajet['id_trajet'] ?>">
                                         <i class="bi bi-eye fs-5"></i>
                                     </a>
 
-                                    <!-- Modifier -->
                                     <a href="/trajet/edit/<?= $trajet['id_trajet'] ?>" class="text-warning" title="Modifier">
                                         <i class="bi bi-pencil-square fs-5"></i>
                                     </a>
 
-                                    <!-- Supprimer -->
                                     <form method="POST" action="/trajet/delete/<?= $trajet['id_trajet'] ?>"
                                         onsubmit="return confirm('Voulez-vous vraiment supprimer ce trajet ?');">
                                         <button type="submit" class="btn p-0 border-0 text-danger" title="Supprimer">
@@ -95,7 +100,6 @@ $controller = new TrajetController();
                                 </td>
                             </tr>
 
-                            <!-- Modal utilisateur -->
                             <div class="modal fade" id="userModal<?= $trajet['id_trajet'] ?>" tabindex="-1" aria-labelledby="userModalLabel<?= $trajet['id_trajet'] ?>" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -105,10 +109,10 @@ $controller = new TrajetController();
                                         </div>
                                         <div class="modal-body">
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><strong>Nom :</strong> <?= htmlspecialchars($user['nom']) ?></li>
-                                                <li class="list-group-item"><strong>Prénom :</strong> <?= htmlspecialchars($user['prenom']) ?></li>
-                                                <li class="list-group-item"><strong>Email :</strong> <?= htmlspecialchars($user['email']) ?></li>
-                                                <li class="list-group-item"><strong>Téléphone :</strong> <?= htmlspecialchars($user['telephone']) ?></li>
+                                                <li class="list-group-item"><strong>Nom :</strong> <?= htmlspecialchars($trajet['user_nom']) ?></li>
+                                                <li class="list-group-item"><strong>Prénom :</strong> <?= htmlspecialchars($trajet['user_prenom']) ?></li>
+                                                <li class="list-group-item"><strong>Email :</strong> <?= htmlspecialchars($trajet['user_email']) ?></li>
+                                                <li class="list-group-item"><strong>Téléphone :</strong> <?= htmlspecialchars($trajet['user_telephone']) ?></li>
                                                 <li class="list-group-item"><strong>Places disponibles :</strong> <?= $trajet['nb_places_disponibles'] ?></li>
                                             </ul>
                                         </div>

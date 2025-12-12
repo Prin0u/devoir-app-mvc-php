@@ -1,5 +1,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<?php require __DIR__ . '/../partials/header.php'; ?>
+<?php
+/**
+ * Vue : Liste des utilisateurs dans l'interface d'administration.
+ * ----------------------------------------------------
+ * Cette page affiche les informations de base de tous les utilisateurs enregistrés
+ * (nom, prénom, email, téléphone) à des fins de consultation par l'administrateur.
+ *
+ * Variables injectées :
+ * - $users (array): Liste des utilisateurs, chaque élément contenant :
+ * ['nom', 'prenom', 'email', 'telephone'].
+ */
+require __DIR__ . '/../partials/header.php';
+?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 

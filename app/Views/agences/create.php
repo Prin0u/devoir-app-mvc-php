@@ -1,5 +1,12 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+/**
+ * Vue : Formulaire de création d'une nouvelle agence.
+ * ----------------------------------------------------
+ * Cette page est utilisée par l'administrateur pour ajouter une nouvelle agence.
+ * Le formulaire utilise la méthode POST et soumet les données à l'action '/admin/agences'
+ * (qui est gérée par la méthode store() de AdminAgencesController).
+ */
 // Assure-toi que le chemin vers header.php est correct par rapport à la racine
 require_once __DIR__ . '/../partials/header.php';
 ?>

@@ -1,10 +1,27 @@
+<?php
+
+/**
+ * Fichier : partials/header.php
+ * Rôle : Fournit la barre de navigation principale de l'application (en-tête).
+ * Description : 
+ * - Contient la structure HTML de la navbar Bootstrap 5.
+ * - Gère l'affichage conditionnel des liens (Connexion/Déconnexion, Créer un trajet) 
+ * en fonction de l'état de la session utilisateur.
+ * - Affiche les liens d'administration si l'utilisateur est administrateur.
+ * * Dépendances :
+ * @uses \Prin0u\DevoirAppMvcPhp\Controllers\AuthController Nécessaire pour vérifier les droits d'administrateur.
+ * * Variables de session utilisées :
+ * @uses $_SESSION['user'] Pour l'authentification et l'affichage du nom de l'utilisateur.
+ */
+
+?>
 <link rel="stylesheet" href="/css/main.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
 <?php
 
+// Importation de la classe AuthController pour vérifier le rôle de l'utilisateur (isAdmin).
 use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
 ?>
 
@@ -24,11 +41,19 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
 
             <ul class="navbar-nav mx-auto mx-lg-0 ms-lg-auto gap-3 flex-column flex-lg-row text-center">
 
-                <?php if (!isset($_SESSION['user'])): ?>
+                <?php
+                /**
+                 * Affichage conditionnel : Utilisateur DÉCONNECTÉ
+                 */
+                if (!isset($_SESSION['user'])): ?>
                     <li class="nav-item w-100">
                         <a href="/login" class="btn btn-light mx-auto" style="display: block; width: fit-content;">Connexion</a>
                     </li>
-                <?php else: ?>
+                <?php
+                    /**
+                     * Affichage conditionnel : Utilisateur CONNECTÉ
+                     */
+                else: ?>
                     <li class="nav-item">
                         <a href="/trajet/create" class="btn-create btn-lg">Créer un trajet</a>
                     </li>
@@ -37,7 +62,11 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
                         Bonjour <?= htmlspecialchars($_SESSION['user']['prenom']) ?> <?= htmlspecialchars($_SESSION['user']['nom']) ?>
                     </li>
 
-                    <?php if (AuthController::isAdmin()): ?>
+                    <?php
+                    /**
+                     * Affichage conditionnel : Liens d'Administration (si l'utilisateur est admin)
+                     */
+                    if (AuthController::isAdmin()): ?>
                         <li class="nav-item">
                             <a href="/admin/users" class="nav-link text-white">Utilisateurs</a>
                         </li>
@@ -51,7 +80,11 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
                 <?php endif; ?>
             </ul>
 
-            <?php if (isset($_SESSION['user'])): ?>
+            <?php
+            /**
+             * Bouton de déconnexion (toujours visible pour les utilisateurs connectés)
+             */
+            if (isset($_SESSION['user'])): ?>
                 <li class="nav-item mt-3 mt-lg-0 list-unstyled">
                     <a href="/logout" class="btn btn-danger">Déconnexion</a>
                 </li>
