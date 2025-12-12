@@ -1,14 +1,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
 /**
- * Vue : Formulaire de modification d'une agence existante.
- * ----------------------------------------------------
+ * Fichier : Views/agences/edit.php
+ * Rôle : Vue affichant le formulaire de modification d'une agence existante.
+ * ----------------------------------------------------------------------
+ * Description : 
  * Cette page est utilisée par l'administrateur pour mettre à jour le nom d'une agence spécifique.
  * Le formulaire utilise la méthode POST et soumet les données à l'action '/admin/agences/update/{id}'.
  *
- * Variables injectées :
- * - $agence (array): Les données de l'agence à modifier, contenant ['id_agence', 'nom'].
+ * Variables de contexte attendues (injectées par le Contrôleur Agences) :
+ * @var array $agence Tableau contenant les données de l'agence à modifier.
+ * Il doit contenir au moins les clés ['id_agence', 'nom'].
  */
+
 require_once __DIR__ . '/../partials/header.php';
 ?>
 

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @var \Buki\Router\Router $router
+ * Ceci permet à PHPStan de savoir que $router existe et quel est son type.
+ */
+?>
+
+<?php
+
 use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
 use Prin0u\DevoirAppMvcPhp\Controllers\TrajetController;
 use Prin0u\DevoirAppMvcPhp\Controllers\AdminController;
