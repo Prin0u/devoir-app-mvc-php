@@ -14,5 +14,8 @@
     "minimum-stability": "stable",
     "require": {
         "izniburak/router": "^3.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
     }
 }
