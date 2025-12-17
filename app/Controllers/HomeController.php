@@ -28,7 +28,6 @@ class HomeController extends Controller
         $pdo = Database::getInstance();
 
         // Récupération des trajets avec places disponibles, dates futures ET données du créateur.
-        // On sélectionne les informations de l'utilisateur (u) et des agences (a1, a2) via des jointures.
         $stmt = $pdo->prepare("
             SELECT t.*, 
                    a1.nom AS depart, 
@@ -49,8 +48,6 @@ class HomeController extends Controller
         $stmt->execute();
         $trajets = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // La liste des trajets est maintenant enrichie avec les clés user_nom, user_prenom, etc.
-        // La Vue n'aura plus besoin d'appeler de méthode de contrôleur pour récupérer ces données.
 
         // Affichage de la vue
         $this->render('home/index', ['trajets' => $trajets]);
@@ -58,8 +55,6 @@ class HomeController extends Controller
 
     /**
      * Méthode utilitaire (anciennement dans TrajetController) pour récupérer les infos complètes d'un utilisateur.
-     * Cette méthode n'est plus strictement nécessaire pour 'index' car les données sont jointes, 
-     * mais elle est conservée pour l'exemple. Si elle est utilisée ailleurs, elle devrait être dans un UserRepository.
      * @param int $userId L'ID de l'utilisateur.
      * @return array Informations utilisateur.
      */
