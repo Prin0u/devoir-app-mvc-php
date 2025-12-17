@@ -65,7 +65,6 @@ class AdminTrajetsController extends Controller
         $stmt->execute();
         $trajets = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // La vue est dans 'views/admin/trajets.php'
         $this->render('admin/trajets', ['trajets' => $trajets]);
     }
 

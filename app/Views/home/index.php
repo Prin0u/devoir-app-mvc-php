@@ -90,7 +90,7 @@
                                 <td><?= $trajet['nb_places_disponibles'] ?></td>
 
                                 <?php
-                                // MASQUER LA CELLULE D'ACTIONS SI DÉCONNECTÉ
+                                // Masquer la cellule d'actions si utilisateur déconnecté
                                 if (isset($_SESSION['user'])): ?>
                                     <td class="d-flex justify-content-center align-items-center gap-2">
 
