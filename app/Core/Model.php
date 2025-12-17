@@ -37,8 +37,16 @@ class Model
             // Configuration pour lever des exceptions en cas d'erreur SQL
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            // Arrêt du script et affichage de l'erreur en cas d'échec de connexion
-            die("Erreur de connexion à la base de données : " . $e->getMessage()); // CONCATENATION CORRIGÉE : / remplacé par .
+            throw $e;
         }
+    }
+    /**
+     * Fournit un accès en lecture à l'objet PDO.
+     * Utilisé principalement pour les tests unitaires pour manipuler la BDD de test.
+     * @return PDO L'objet de connexion PDO.
+     */
+    public function getPdo(): PDO
+    {
+        return $this->pdo;
     }
 }

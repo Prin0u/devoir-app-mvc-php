@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\TrajetTest::testStoreSuccessfullyCreatesNewTrajet":7},"times":{"Tests\\TrajetTest::testStoreSuccessfullyCreatesNewTrajet":0.003,"Tests\\TrajetTest::testDeleteSuccessfullyRemovesTrajet":0.005,"Tests\\TrajetTest::testUpdateSuccessfullyModifiesTrajet":0.003}}
