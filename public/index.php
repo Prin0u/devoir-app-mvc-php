@@ -1,8 +1,11 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
 
-   
+
 
 // Chargement de l'autoload Composer
 
