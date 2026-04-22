@@ -36,7 +36,8 @@ class Database
             $config = require self::$configFile;
 
             // Construction du Data Source Name (DSN)
-            $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}";
+            $port = $config['port'] ?? '5432';
+            $dsn = "pgsql:host={$config['host']};port={$port};dbname={$config['dbname']}";
 
             try {
                 // Création et stockage de l'instance PDO
@@ -51,7 +52,7 @@ class Database
                     ]
                 );
             } catch (PDOException $e) {
-                throw $e;
+                throw new PDOException("Erreur de connexion : " . $e->getMessage());
             }
         }
 
