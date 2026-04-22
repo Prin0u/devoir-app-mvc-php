@@ -1,5 +1,5 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+
 /**
  * Vue : Formulaire de création d'une nouvelle agence.
  * ----------------------------------------------------
@@ -8,7 +8,6 @@
  * (qui est gérée par la méthode store() de AdminAgencesController).
  */
 // Assure-toi que le chemin vers header.php est correct par rapport à la racine
-require_once __DIR__ . '/../partials/header.php';
 ?>
 
 
@@ -39,7 +38,3 @@ require_once __DIR__ . '/../partials/header.php';
         </div>
     </form>
 </div>
-
-<?php
-include __DIR__ . '/../partials/footer.php';
-?>

@@ -1,4 +1,3 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -13,7 +12,6 @@
  * - $trajets (array): Liste des trajets, chaque élément contenant :
  * ['id_trajet', 'depart', 'arrivee', 'date_heure_depart', 'user_prenom', 'user_nom'].
  */
-require __DIR__ . '/../partials/header.php';
 ?>
 <div class="container mt-5">
 
@@ -77,4 +75,3 @@ require __DIR__ . '/../partials/header.php';
 
     <?php endif; ?>
 </div>
-<?php require __DIR__ . '/../partials/footer.php'; ?>

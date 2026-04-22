@@ -11,8 +11,6 @@
  * @uses $_SESSION['user'] Pour vérifier l'authentification et l'ID de l'utilisateur actuel.
  */
 ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<?php include __DIR__ . '/../partials/header.php'; ?>
 
 <div class="container mt-5">
     <h1 class="text-center mb-4">Liste des trajets</h1>
@@ -79,5 +77,3 @@
         <?php endif; ?>
     </div>
 </div>
-
-<?php include __DIR__ . '/../partials/footer.php'; ?>

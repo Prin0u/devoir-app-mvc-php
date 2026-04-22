@@ -1,5 +1,5 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+
 /**
  * Fichier : Views/agences/edit.php
  * Rôle : Vue affichant le formulaire de modification d'une agence existante.
@@ -13,7 +13,6 @@
  * Il doit contenir au moins les clés ['id_agence', 'nom'].
  */
 
-require_once __DIR__ . '/../partials/header.php';
 ?>
 
 
@@ -46,7 +45,3 @@ require_once __DIR__ . '/../partials/header.php';
         </div>
     </form>
 </div>
-
-<?php
-include __DIR__ . '/../partials/footer.php';
-?>
