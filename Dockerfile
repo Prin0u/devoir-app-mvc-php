@@ -15,6 +15,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Active le module rewrite d’Apache
 RUN a2enmod rewrite
 
+# Logs errors
+RUN echo "log_errors = On" >> /usr/local/etc/php/php.ini \
+&& echo "error_log = /proc/1/fd/2" >> /usr/local/etc/php/php.ini \
+&& echo "display_errors = Off" >> /usr/local/etc/php/php.ini
+
 # Copie des fichiers de dépendances en premier (pour optimiser le cache Docker)
 COPY composer.json composer.lock ./
 
