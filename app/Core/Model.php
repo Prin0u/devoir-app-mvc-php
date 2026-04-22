@@ -3,15 +3,15 @@
 /**
  * Fichier Model.php
  * * Classe de base pour tous les modèles de l'application.
- * Elle établit la connexion PDO à la base de données et fournit l'objet PDO
- * aux modèles enfants pour les interactions CRUD.
+ * Elle fournit l'objet PDO aux modèles enfants pour les interactions CRUD,
+ * en utilisant la connexion centralisée.
  * @package Prin0u\DevoirAppMvcPhp\Core
  */
 
 namespace Prin0u\DevoirAppMvcPhp\Core;
 
 use PDO;
-use PDOException;
+use Prin0u\DevoirAppMvcPhp\Core\Database;
 
 class Model
 {
@@ -22,24 +22,14 @@ class Model
 
     /**
      * Constructeur de la classe Model.
-     * Initialise la connexion à la base de données en utilisant les paramètres fournis.
-     * @param array $dbConfig Tableau de configuration de la base de données (host, dbname, user, password, charset).
+     * Récupère l'instance unique de connexion PDO via la classe Database.
      */
-    public function __construct(array $dbConfig)
+    public function __construct()
     {
-        try {
-            // Création de l'objet PDO
-            $this->pdo = new PDO(
-                "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']};charset={$dbConfig['charset']}",
-                $dbConfig['user'],
-                $dbConfig['password']
-            );
-            // Configuration pour lever des exceptions en cas d'erreur SQL
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            throw $e;
-        }
+        // On récupère la connexion unique centralisée via le singleton
+        $this->pdo = Database::getInstance();
     }
+
     /**
      * Fournit un accès en lecture à l'objet PDO.
      * Utilisé principalement pour les tests unitaires pour manipuler la BDD de test.

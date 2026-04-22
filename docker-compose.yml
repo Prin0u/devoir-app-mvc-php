@@ -1,0 +1,26 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=database_tpak
+      - DB_USER=tpak_user
+      - DB_PASS=MotDePasse123!
+      - DB_PORT=5432
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: database_tpak
+      POSTGRES_USER: tpak_user
+      POSTGRES_PASSWORD: MotDePasse123!
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/01_init.sql
+      - ./docker/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
