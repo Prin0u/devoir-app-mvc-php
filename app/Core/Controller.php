@@ -21,7 +21,14 @@ class Controller
     protected function render(string $view, array $data = [])
     {
         extract($data);
+
+        // Capture le contenu de la vue
+        ob_start();
         require __DIR__ . '/../Views/' . $view . '.php';
+        $content = ob_get_clean();
+
+        // Injecte dans le layout
+        require __DIR__ . '/../Views/partials/layout.php';
     }
 
     /**

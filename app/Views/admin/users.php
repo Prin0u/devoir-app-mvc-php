@@ -1,5 +1,5 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <?php
+
 /**
  * Vue : Liste des utilisateurs dans l'interface d'administration.
  * ----------------------------------------------------
@@ -10,7 +10,6 @@
  * - $users (array): Liste des utilisateurs, chaque élément contenant :
  * ['nom', 'prenom', 'email', 'telephone'].
  */
-require __DIR__ . '/../partials/header.php';
 ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -47,5 +46,3 @@ require __DIR__ . '/../partials/header.php';
         </div>
     <?php endif; ?>
 </div>
-
-<?php require __DIR__ . '/../partials/footer.php'; ?>
