@@ -54,9 +54,7 @@ use Prin0u\DevoirAppMvcPhp\Controllers\AuthController;
                      * Affichage conditionnel : Utilisateur CONNECTÉ
                      */
                 else: ?>
-                    <li class="nav-item">
-                        <a href="/trajet/create" class="btn-create btn-lg">Créer un trajet</a>
-                    </li>
+
 
                     <li class="nav-item text-white mx-1">
                         Bonjour <?= htmlspecialchars($_SESSION['user']['prenom']) ?> <?= htmlspecialchars($_SESSION['user']['nom']) ?>

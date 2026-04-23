@@ -38,6 +38,9 @@
      */
     if (isset($_SESSION['user'])): ?>
         <h2 class="text-center mb-4">Trajets proposés</h2>
+        <div class="text-center mb-3">
+            <a href="/trajet/create" class="btn-create btn-lg">Créer un trajet</a>
+        </div>
     <?php else: ?>
         <h2 class="text-center mb-4">Pour obtenir plus d'informations sur un trajet, veuillez vous connecter.</h2>
     <?php endif; ?>
