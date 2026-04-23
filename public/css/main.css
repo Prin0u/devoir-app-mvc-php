@@ -17,7 +17,7 @@
 .navbar .navbar-nav .nav-item {
   color: #ffffff;
 }
-.navbar .navbar-nav .nav-item .btn-create {
+.btn-create {
   min-width: 180px;
   border-radius: 5px;
   text-decoration: none;
