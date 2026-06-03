@@ -55,8 +55,8 @@ abstract class BaseTest extends TestCase
         Database::setConfigFile($testConfigPath);
 
 
-        $baseModel = new Model(self::$dbConfig);
-        $this->pdo = $baseModel->getPdo(); // On obtient l'instance PDO
+        $this->pdo = Database::getInstance();
+
 
         // 1. Démarrer la session si nécessaire
         if (session_status() === PHP_SESSION_NONE) {
