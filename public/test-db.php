@@ -10,7 +10,7 @@ $config = require __DIR__ . '/../config/database.php';
 
 try {
     $pdo = new PDO(
-        "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}",
+        "pgsql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}",
         $config['user'],
         $config['password']
     );
@@ -29,7 +29,6 @@ try {
         }
         echo "</ul>";
     }
-
 } catch (PDOException $e) {
     echo "Erreur BDD : " . $e->getMessage();
 }

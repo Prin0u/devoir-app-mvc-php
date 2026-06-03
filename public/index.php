@@ -11,6 +11,9 @@ use Prin0u\DevoirAppMvcPhp\Controllers\HomeController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 // Chargement des fichiers de configuration
 
 $config = require __DIR__ . '/../config/config.php';
